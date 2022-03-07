@@ -1,0 +1,11 @@
+{
+  "name": "extext",
+  "version": "1.0.0",
+  "description": "Fast web development",
+  "scripts": {
+    "preinstall": "npm i serve concurrently opener -g",
+    "start": "concurrently \"serve src -p 3032\" \"opener http://localhost:3032\""
+  },
+  "author": "Lewis Nakao <lewdev@gmail.com>",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html><html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>ExText | Fast web development now in browser</title>
+  <meta name="author" content="Lewis Nakao">
+  <meta name="description" content="Fast web development now in browser">
+  <!-- <meta name="keywords" content="Code Generation, Vanilla JavaScript, Open Source"> -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🧑‍💻 ExText | Fast web development now in browser">
+  <meta name="twitter:description" content="Fast web development now in browser">
+  <meta name="twitter:site" content="@lewdev">
+  <meta name="twitter:creator" content="@lewdev">
+  <meta name="twitter:image" content="https://lewdev.github.io/apps/extext/img/banner-1200x630.png">
+
+  <!-- Open Graph general (Facebook, Pinterest)-->
+  <meta property="og:title" content="🧑‍💻 ExText | Fast web development now in browser">
+  <meta property="og:description" content="Fast web development now in browser">
+  <meta property="og:url" content="https://lewdev.github.io/apps/extext/">
+  <meta property="og:site_name" content="lewdev.github.io">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://lewdev.github.io/apps/extext/img/banner-1200x630.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/theme/monokai.min.css"></link>
+
+  <style>
+  iframe, .CodeMirror, .CodeMirror-scroll {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 100% !important;
+    vertical-align:top
+  }
+  .col {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  .col-l { left: 0; right: 50%; }
+  .col-r { left: 50%; right: 100%; }
+  </style>
+  <body>
+  <div class="col col-l">
+    <textarea id=c></textarea>
+  </div>
+
+  <div class="col col-r">
+    <iframe id=f></iframe>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script>
+    var editor = CodeMirror.fromTextArea(c, {
+      mode: 'htmlmixed',
+      theme: 'monokai',
+      lineNumbers: true,
+      indentUnit: 2,
+      tabSize: 2,
+      indentWithTabs: false,
+      matchBrackets: true,
+      wrap: true,
+    });
+    onkeypress = e => (e.ctrlKey && e.keyCode==13) || e.keyCode==10
+      ? f.srcdoc = editor.getValue() : 0;
+  </script>
+</body></html>
