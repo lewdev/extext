@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css" integrity="sha512-2OhXH4Il3n2tHKwLLSDPhrkgnLBC+6lHGGQzSFi3chgVB6DJ/v6+nbx+XYO9CugQyHVF/8D/0k3Hx1eaUK2K9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
+  html {
+    scroll-behavior: smooth;
+  }
   iframe, .CodeMirror, .CodeMirror-scroll {
     box-sizing: border-box;
     margin: 0;
@@ -50,6 +53,7 @@
   .col-l { left: 0; right: 50%; }
   .col-r { left: 50%; right: 100%; }
   </style>
+
   <body>
   <div class="col col-l">
     <textarea id=c></textarea>
@@ -89,38 +93,9 @@
   <!-- auto closes brackets like {}[]""'' -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js" integrity="sha512-cCnOU69ESswPmMV3f9TR7WgctoJZliqGbJ8WeLn0VlUrngSsmtVopRf6OG/epbURGfNmY4RY6RzZ/mWkPQ/onw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
-var editor = CodeMirror.fromTextArea(c, {
-  autofocus: true,
-  mode: 'htmlmixed',
-  theme: 'material-darker',
-  lineNumbers: true,
-  lineWrapping: true,
-  indentUnit: 2,
-  tabSize: 2,
-  indentWithTabs: false,
-  matchBrackets: true,
-  autoCloseBrackets: true,
-  autoCloseTags: true,
-  matchTags: true,
-  styleActiveLine: true,
-  //for text match-highlighter and show on scrollbar.
-  highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
-});
+  <script src="./script.js"></script>
 
-const keyshortcuts = {
-  //run code
-  "Ctrl-Enter": () => f.srcdoc = editor.getValue(),
-
-  //indenting
-  "Shift-Tab": "indentLess",
-  "Tab": "indentMore",
-
-  //toggle comments
-  'Ctrl-/': "toggleComment",
-};
-
-CodeMirror.keyMap.default = Object.assign(CodeMirror.keyMap.default, keyshortcuts);
-
-</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2833478-13"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());gtag('config', 'UA-2833478-13');</script>
 </body></html>
