@@ -2,7 +2,7 @@
 Fast web development now in your browser using [CodeMirror](https://codemirror.net/).
 
 <p align="center">
-  <img src="https://lewdev.github.io/apps/extext/assets/main-icon.png" width="400"/><br/>
+  <img src="https://lewdev.github.io/apps/extext/img/main-icon.png" width="400"/><br/>
   <a href="https://lewdev.github.io/apps/extext">👉 Try Extext Here</a><br/>
 </p>
 
