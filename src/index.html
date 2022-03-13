@@ -7,58 +7,47 @@
   <title>ExText | Fast web development now in browser</title>
   <meta name="author" content="Lewis Nakao">
   <meta name="description" content="Fast web development now in browser">
-  <!-- <meta name="keywords" content="Code Generation, Vanilla JavaScript, Open Source"> -->
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="👨‍💻 ExText | Fast web development now in browser">
+  <meta name="twitter:title" content="💻 ExText | Fast web development now in browser">
   <meta name="twitter:description" content="Fast web development now in browser">
   <meta name="twitter:site" content="@lewdev">
   <meta name="twitter:creator" content="@lewdev">
   <meta name="twitter:image" content="https://lewdev.github.io/apps/extext/img/banner-1200x630.png">
 
   <!-- Open Graph general (Facebook, Pinterest)-->
-  <meta property="og:title" content="👨‍💻 ExText | Fast web development now in browser">
+  <meta property="og:title" content="💻 ExText | Fast web development now in browser">
   <meta property="og:description" content="Fast web development now in browser">
   <meta property="og:url" content="https://lewdev.github.io/apps/extext/">
   <meta property="og:site_name" content="lewdev.github.io">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://lewdev.github.io/apps/extext/img/banner-1200x630.png">
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 
+  <!-- CodeMirror CDN: https://cdnjs.com/libraries/codemirror -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css"></link>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/matchesonscrollbar.min.css" integrity="sha512-h4gYceFQpTbeHoczmjo5uOd3MIEXhf1k7LTrsPLIDrOUGu0fiT0SXB6JfoR2iAg8ml7c0cN8Eq4pvD56LLaZGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/dialog/dialog.min.css" integrity="sha512-Vogm+Cii1SXP5oxWQyPdkA91rHB776209ZVvX4C/i4ypcfBlWVRXZGodoTDAyyZvO36JlTqDqkMhVKAYc7CMjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css" integrity="sha512-2OhXH4Il3n2tHKwLLSDPhrkgnLBC+6lHGGQzSFi3chgVB6DJ/v6+nbx+XYO9CugQyHVF/8D/0k3Hx1eaUK2K9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <style>
-  html {
-    scroll-behavior: smooth;
-  }
-  iframe, .CodeMirror, .CodeMirror-scroll {
-    box-sizing: border-box;
-    margin: 0;
-    border: 0;
-    width: 100%;
-    height: 100% !important;
-    vertical-align:top
-  }
-  .col {
-    width: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-  }
-  .col-l { left: 0; right: 50%; }
-  .col-r { left: 50%; right: 100%; }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css" integrity="sha512-OmcLQEy8iGiD7PSm85s06dnR7G7C9C0VqahIPAj/KHk5RpOCmnC6R2ob1oK4/uwYhWa9BF1GC6tzxsC8TIx7Jg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css"/>
 
   <body>
+  <div class="top-bar">
+    <button class="button-84" id="save" title="Ctrl-S, Save to .html file">💾 Save</button>
+    <button class="button-84" id="run" title="Ctrl-'">🏃‍♂️ Run</button>
+    <span class="button-84">
+      <label>
+        <input id="horiz" type="checkbox"/> Horizontal
+      </label>
+    </span>
+  </div>
+
   <div class="col col-l">
     <textarea id=c></textarea>
   </div>
-
 
   <div class="col col-r">
     <iframe id=f sandbox="allow-forms allow-popups allow-scripts allow-same-origin allow-modals"></iframe>
@@ -71,7 +60,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/css/css.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/htmlmixed/htmlmixed.min.js"></script>
 
-  <!-- Press Ctrl+F to search -->
+  <!-- Press Ctrl-F, Ctr-Shift-R to search, search & replace, etc. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/search.min.js" integrity="sha512-jbqegru8OL6hPtAAWTI/+r30j95Qdyx9AESgBC1dB6Ldjqzc292pDWFdLPVWHpgyYM5V//zdNjP8PjdVlRPmXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Toggle Comments -->
@@ -92,6 +81,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js" integrity="sha512-03Ei8A+mDhwF6O/CmXM47U4A9L7TobAxMbPV2Wn5cEbY76lngHQRyvvmnqhJ8IthfoxrRqmtoBxQCxOC7AOeKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- auto closes brackets like {}[]""'' -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js" integrity="sha512-cCnOU69ESswPmMV3f9TR7WgctoJZliqGbJ8WeLn0VlUrngSsmtVopRf6OG/epbURGfNmY4RY6RzZ/mWkPQ/onw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Sublime Commands -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/keymap/sublime.min.js" integrity="sha512-CB1k89Ilzxp1upm9MpHjWR0Ec2wg/OzDfWC/pmjJkDnxmXMl4AhgZ4bYPdkWjlL6NoLfoZppxHf55hunUgg8wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Use JavaScript declared in code to give hints -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js" integrity="sha512-kCn9g92k3GM90eTPGMNwvpCAtLmvyqbpvrdnhm0NMt6UEHYs+DjRO4me8VcwInLWQ9azmamS1U1lbQV627/TBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/javascript-hint.min.js" integrity="sha512-HB0sEfERI4Pe2z7rbx7JVGS0SEEGbnAbV+9X0bs3Hs9R/nCYartwJQg16bK1P0jPsMzbiXjT+kYNHYLCsHQ8HA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="./script.js"></script>
 
