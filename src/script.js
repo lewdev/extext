@@ -1,5 +1,24 @@
 const USER_CONFIG_REF = "extext-config";
 
+let userConfig = {
+  useHorizLayout: false,
+  content: "",
+};
+
+onload = () => {
+  let storedConfig = localStorage.getItem(USER_CONFIG_REF);
+  if (storedConfig) userConfig = JSON.parse(storedConfig);
+  const { content, useHorizLayout } = userConfig;
+
+  // set the last run content
+  editor.setValue(content);
+
+  if (useHorizLayout) {
+    document.body.className = 'horiz';
+    horiz.checked = true;
+  }
+};
+
 // my commands
 const runCode = () => {
   const content = editor.getValue()
@@ -15,15 +34,16 @@ const runCode = () => {
 const saveToFile = () => {
   const content = editor.getValue();
   const mimeType = "text";
-  const fileName = "extext-" + getTimestamp() + ".html";
+  const fileName = prompt("Enter filename", "extext-" + getTimestamp() + ".html");
+  if (!fileName) return;
 
   //Code from: https://stackoverflow.com/a/64908345/1675237
-  const a = document.createElement('a') // Create "a" element
-  const blob = new Blob([content], {type: mimeType}) // Create a blob (file-like object)
-  const url = URL.createObjectURL(blob) // Create an object URL from blob
-  a.setAttribute('href', url) // Set "a" element link
-  a.setAttribute('download', fileName) // Set download filename
-  a.click() // Start downloading
+  const a = document.createElement('a'); // Create "a" element
+  const blob = new Blob([content], {type: mimeType}); // Create a blob (file-like object)
+  const url = URL.createObjectURL(blob); // Create an object URL from blob
+  a.setAttribute('href', url); // Set "a" element link
+  a.setAttribute('download', fileName); // Set download filename
+  a.click(); // Start downloading
 };
 
 const toggleHorizLayout = e => {
@@ -58,9 +78,10 @@ const editor = CodeMirror.fromTextArea(c, {
     //run code
     "Cmd-'": runCode,
     "Ctrl-'": runCode,
-
-    'Cmd-S': saveToFile,
-    'Ctrl-S': saveToFile,
+    'Cmd-S': runCode,
+    'Ctrl-S': runCode,
+    'Cmd-Enter': runCode,
+    'Ctrl-Enter': runCode,
 
     'Shift-Alt-Up': "duplicateLine",
     'Shift-Alt-Down': "duplicateLine",
@@ -72,24 +93,6 @@ const editor = CodeMirror.fromTextArea(c, {
   },
 });
 
-let userConfig = {
-  useHorizLayout: false,
-  content: "",
-};
-
-onload = () => {
-  let storedConfig = localStorage.getItem(USER_CONFIG_REF);
-  if (storedConfig) userConfig = JSON.parse(storedConfig);
-  const { content, useHorizLayout } = userConfig;
-
-  // set the last run content
-  editor.setValue(content);
-
-  if (useHorizLayout) {
-    document.body.className = 'horiz';
-    horiz.checked = true;
-  }
-};
 
 // top bar buttons
 run.onclick = () => runCode();
@@ -101,9 +104,11 @@ horiz.onclick = toggleHorizLayout;
 const pad = n => n < 10 ? "0" + n : n;
 
 const getTimestamp = () => {
-  const d = new Date();
-  const dateAttributes = "FullYear, Month, Date, -, Hours, Minutes, Seconds".split(", ");
-  return dateAttributes.map(a => a === '-' ? a : pad(d["get" + a]())).join("");
+  const format = "FullYear Month Date - Hours Minutes Seconds".split(" ");
+  const date = new Date();
+  //getMonth() needs to add 1 since January = 0, enabled '-' dash too
+  return format.map(a => a === '-' ? a : pad(
+    date["get" + a]() + (a === "Month" ? 1 : 0)
+  )).join("");
 };
-
-// console.log(CodeMirror.keyMap.default, CodeMirror.keyMap.sublime);
+//example output: "20220410-170928"

@@ -21,15 +21,17 @@ This project started off from my [tiny-code-editor](https://github.com/lewdev/ti
 * JavaScript hint and auto complete. ([details](https://codemirror.net/demo/complete.html))
 
 ## ⌨ Additional Key Shortcuts
-* `Ctrl-'` : Run code in `iframe`.
+* `Ctrl-'` or `Ctrl-S`: Run code in `iframe`.
 * `Ctrl-S` : Saves text in editor to `extext-{timestamp}.html` file.
 * `Ctrl-D` : (overridden) Delete line
 * `Shift-Alt-Down` : Duplicate line
 * `Shift-Alt-Up` : Duplicate line
 
 <p align="center">
-  <img src="https://lewdev.github.io/apps/extext/img/main-icon.png" width="400"/><br/>
-  <a href="https://lewdev.github.io/apps/extext">👉 Try Extext Here</a><br/>
+  <a href="https://lewdev.github.io/apps/extext">
+    <img src="https://lewdev.github.io/apps/extext/img/main-icon.png" width="400"/><br/>
+    👉 Try Extext Here
+  </a><br/>
 </p>
 
 ## ⛰ Screenshots
@@ -43,6 +45,14 @@ This project started off from my [tiny-code-editor](https://github.com/lewdev/ti
   </a>
 </p>
 
+## 👉 Next Features
+
+Features I may or may not implement in the future.
+
+* Help menu that displays all key shortcuts
+* Github Gist integration. Enable loading and saving Gists.
+* (separate, but related app) A JavaScript code-challenge builder.
+
 ## 🛠️ Tools & Resources used
 
 * [CodeMirror](https://codemirror.net) the text editor code.
@@ -50,6 +60,7 @@ This project started off from my [tiny-code-editor](https://github.com/lewdev/ti
 * google-closure-compiler
 * clean-css
 * ant
+* [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) (vscode extension)
 
 ## 👤 Author: Lewis Nakao
 I am a software engineer in Hawaii. Find more stuff I made [here](https://lewdev.github.io).

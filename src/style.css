@@ -39,7 +39,7 @@ body.horiz > .col-r {
 .col-r { left: 50%; right: 100%; }
 
 /* highlight feature  */
-.cm-matchhighlight { background-color: #546654 }
+.cm-matchhighlight { border: 1px solid #546654 } /*background-color: #546654*/
 .CodeMirror-selection-highlight-scrollbar { background-color: rgb(2, 116, 2) }
 
 /* show-hint */
