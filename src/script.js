@@ -101,7 +101,7 @@ horiz.onclick = toggleHorizLayout;
 
 
 // util methods
-const pad = n => n < 10 ? "0" + n : n;
+const pad = n => n > 9 ? n : "0" + n;
 
 const getTimestamp = () => {
   const format = "FullYear Month Date - Hours Minutes Seconds".split(" ");
