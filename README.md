@@ -5,6 +5,8 @@ I hope the code is not too complex such that you can use the code as the basis t
 
 This project started off from my [tiny-code-editor](https://github.com/lewdev/tiny-code-editor) which was inspired by [Mini Code Editor](https://xem.github.io/miniCodeEditor/) by [xem](https://twitter.com/MaximeEuziere).
 
+I got my minified CDN files from [CDNJS codemirror](https://cdnjs.com/libraries/codemirror).
+
 ## ⚒️ Features
 * Run HTML code in your browser using a Sublime Text-like editor.
 * Download your work to an `html` file (i.e. `extext-20220312-182230.html`)
