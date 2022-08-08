@@ -39,7 +39,6 @@ const mapToTableRows = (map, isSublime) => Object.keys(map).map(key => {
   const action = (
     val === runCode ? "Run code" :
     val === showKeyShortcuts ? "Show Key Shortcuts" :
-    val === hideKeyShortcuts ? "Hide Key Shortcuts" :
     val);
   const isOverridden = isSublime && editor.options.extraKeys[key];
   return `<tr><td>${key}</td><td>${action}${isOverridden ? " <span class='overridden'>(overridden)</span>" : ""}</td></tr>`;
@@ -66,7 +65,7 @@ const hideKeyShortcuts = () => {
 };
 document.body.onkeydown = e => {
   if (e.keyCode === 27) hideKeyShortcuts();//Esc
-  else if (e.ctrlKey && keyCode === 190) showKeyShortcuts(); //Ctrl+.
+  else if (e.ctrlKey && e.keyCode === 190) showKeyShortcuts(); //Ctrl+.
 };
 
 const saveToFile = () => {

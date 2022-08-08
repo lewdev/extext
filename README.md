@@ -7,9 +7,14 @@ This project started off from my [tiny-code-editor](https://github.com/lewdev/ti
 
 I got my minified CDN files from [CDNJS codemirror](https://cdnjs.com/libraries/codemirror).
 
+<p align="center">
+  <img src="https://lewdev.github.io/apps/extext/img/main-icon.png" width="400"/><br/>
+  <a href="https://lewdev.github.io/apps/extext">👉 Try Extext Here</a>
+</p>
+
 ## ⚒️ Features
 * Run HTML code in your browser using a Sublime Text-like editor.
-* Download your work to an `html` file (i.e. `extext-20220312-182230.html`)
+* Download your work to an `html` file (i.e. `extext-{timestamp}.html`)
 * The editor saves what you last ran on `localStorage`.
 * Toggle between Horizontal and Vertical views.
 * Minimal design.
@@ -23,18 +28,12 @@ I got my minified CDN files from [CDNJS codemirror](https://cdnjs.com/libraries/
 * JavaScript hint and auto complete. ([details](https://codemirror.net/demo/complete.html))
 
 ## ⌨ Additional Key Shortcuts
+In addition to [Sublime Key shortcuts](https://codemirror.net/demo/sublime.html):
 * `Ctrl-'` or `Ctrl-S`: Run code in `iframe`.
-* `Ctrl-S` : Saves text in editor to `extext-{timestamp}.html` file.
 * `Ctrl-D` : (overridden) Delete line
+* `Ctrl-.` : View Key Shortcuts
 * `Shift-Alt-Down` : Duplicate line
 * `Shift-Alt-Up` : Duplicate line
-
-<p align="center">
-  <a href="https://lewdev.github.io/apps/extext">
-    <img src="https://lewdev.github.io/apps/extext/img/main-icon.png" width="400"/><br/>
-    👉 Try Extext Here
-  </a><br/>
-</p>
 
 ## ⛰ Screenshots
 
