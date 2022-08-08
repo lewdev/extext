@@ -35,7 +35,12 @@ const runCode = () => {
 };
 
 const mapToTableRows = (map, isSublime) => Object.keys(map).map(key => {
-  const action = map[key] === runCode ? "Run code" : map[key];
+  const val = map[key];
+  const action = (
+    val === runCode ? "Run code" :
+    val === showKeyShortcuts ? "Show Key Shortcuts" :
+    val === hideKeyShortcuts ? "Hide Key Shortcuts" :
+    val);
   const isOverridden = isSublime && editor.options.extraKeys[key];
   return `<tr><td>${key}</td><td>${action}${isOverridden ? " <span class='overridden'>(overridden)</span>" : ""}</td></tr>`;
 }).join("");
@@ -50,10 +55,18 @@ const renderKeyShortcuts = () => {
     </tbody>
   </table>`;
 };
-const showKeyShortcuts = keyShortcuts.onclick = e => {
-  if (e) e.preventDefault();
+keyShortcuts.onclick = e => { e.preventDefault(); showKeyShortcuts(); };
+const showKeyShortcuts = () => {
   window.location = "#key-shortcuts";
   renderKeyShortcuts();
+};
+const hideKeyShortcuts = () => {
+  window.location = "#";
+  editor.focus();
+};
+document.body.onkeydown = e => {
+  if (e.keyCode === 27) hideKeyShortcuts();//Esc
+  else if (e.ctrlKey && keyCode === 190) showKeyShortcuts(); //Ctrl+.
 };
 
 const saveToFile = () => {
@@ -111,7 +124,7 @@ const editor = CodeMirror.fromTextArea(c, {
 
     'Shift-Alt-Up': "duplicateLine",
     'Shift-Alt-Down': "duplicateLine",
-    'Ctrl-.': () => showKeyShortcuts(),
+    'Ctrl-.': showKeyShortcuts,
 
     "Ctrl-D": "deleteLine",
     "Cmd-D": "deleteLine",

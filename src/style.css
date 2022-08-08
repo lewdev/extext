@@ -3,6 +3,7 @@ body {
   overflow: hidden;
 }
 * {scrollbar-width: thin;}
+a { text-decoration: none; }
 
 iframe, .CodeMirror {
   box-sizing: border-box;
@@ -142,6 +143,7 @@ body.horiz > .col-r {
   pointer-events: none;
   transition: all 0.3s;
   background-color: rgba(0,0,0,0.5);
+  z-index: 6;
 }
 .modal-window:target {
   opacity: 1;
