@@ -17,6 +17,9 @@ onload = () => {
     document.body.className = 'horiz';
     horiz.checked = true;
   }
+
+  //if user is already seeing the hash in the URL, it will render the shortcuts
+  if (location.href.includes("#key-shortcuts")) renderKeyShortcuts();
 };
 
 // my commands
@@ -29,6 +32,28 @@ const runCode = () => {
 
   //run code in iframe
   f.srcdoc = content;
+};
+
+const mapToTableRows = (map, isSublime) => Object.keys(map).map(key => {
+  const action = map[key] === runCode ? "Run code" : map[key];
+  const isOverridden = isSublime && editor.options.extraKeys[key];
+  return `<tr><td>${key}</td><td>${action}${isOverridden ? " <span class='overridden'>(overridden)</span>" : ""}</td></tr>`;
+}).join("");
+
+const renderKeyShortcuts = () => {
+  const keyShortcutsTable = document.querySelector(".modal-window > div > .modal-content");
+  keyShortcutsTable.innerHTML = `<table class="keyshortcuts-table"><thead><tr><th>Keys</th><th>Action</th></tr></thead>
+    <tbody>
+      ${mapToTableRows(editor.options.extraKeys)}
+      <tr><th colspan="2" style="padding-top:.5rem">Sublime Keyshortcuts</th></tr>
+      ${mapToTableRows(CodeMirror.keyMap.sublime, true)}
+    </tbody>
+  </table>`;
+};
+const showKeyShortcuts = keyShortcuts.onclick = e => {
+  if (e) e.preventDefault();
+  window.location = "#key-shortcuts";
+  renderKeyShortcuts();
 };
 
 const saveToFile = () => {
@@ -62,6 +87,7 @@ const editor = CodeMirror.fromTextArea(c, {
   indentUnit: 2,
   tabSize: 2,
   indentWithTabs: false,
+  smartIndent: false,//it just indents to last indent level now
   matchBrackets: true,
   autoCloseBrackets: true,
   autoCloseTags: true,
@@ -72,7 +98,7 @@ const editor = CodeMirror.fromTextArea(c, {
     minChars: 2,
     showToken: /\w/,
     annotateScrollbar: true,
-    style:'matchhighlight',
+    style: 'matchhighlight',
   },
   extraKeys: {
     //run code
@@ -85,6 +111,7 @@ const editor = CodeMirror.fromTextArea(c, {
 
     'Shift-Alt-Up': "duplicateLine",
     'Shift-Alt-Down': "duplicateLine",
+    'Ctrl-.': () => showKeyShortcuts(),
 
     "Ctrl-D": "deleteLine",
     "Cmd-D": "deleteLine",
@@ -93,12 +120,10 @@ const editor = CodeMirror.fromTextArea(c, {
   },
 });
 
-
 // top bar buttons
 run.onclick = () => runCode();
 save.onclick = () => saveToFile();
 horiz.onclick = toggleHorizLayout;
-
 
 // util methods
 const pad = n => n > 9 ? n : "0" + n;

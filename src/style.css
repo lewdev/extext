@@ -1,6 +1,8 @@
 body {
   margin: 0;
+  overflow: hidden;
 }
+* {scrollbar-width: thin;}
 
 iframe, .CodeMirror {
   box-sizing: border-box;
@@ -43,7 +45,6 @@ body.horiz > .col-r {
 .CodeMirror-selection-highlight-scrollbar { background-color: rgb(2, 116, 2) }
 
 /* show-hint */
-
 .CodeMirror-hints {
   background-color: #464d55;
   color: white !important;
@@ -110,3 +111,68 @@ body.horiz > .col-r {
     height: 48px;
   }
 }
+
+/* Key Shortcuts Table */
+.keyshortcuts-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+.keyshortcuts-table > tbody > tr > td:first-child {
+  white-space: nowrap;
+  text-align: right;
+}
+.keyshortcuts-table > tbody > tr > td {
+  border-top: 1px solid gray;
+  padding-right: 1rem;
+}
+.keyshortcuts-table .overridden {
+  color: blue;
+  font-size: .5rem;
+}
+
+/* CSS only Modal | Source: https://codepen.io/timothylong/pen/HhAer/ */
+.modal-window {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  height: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 1.5rem;
+  background: #ffffff;
+  color: #333333;
+  overflow: auto;
+  border-radius: .5rem;
+}
+.modal-close {
+  color: #aaa;
+  line-height: 1em;
+  width: 1em;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 3rem;
+  transition: all 0.3s;
+}
+.modal-close:hover {
+  color: #000;
+}
+/* END CSS only Modal */
