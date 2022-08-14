@@ -34,12 +34,14 @@ const runCode = () => {
   f.srcdoc = content;
 };
 
+const capCamel = s => s.charAt(0).toUpperCase() + s.substring(1).split(/(?=[A-Z])/).join` `;
+
 const mapToTableRows = (map, isSublime) => Object.keys(map).map(key => {
   const val = map[key];
   const action = (
     val === runCode ? "Run code" :
     val === showKeyShortcuts ? "Show Key Shortcuts" :
-    val);
+    capCamel(val));
   const isOverridden = isSublime && editor.options.extraKeys[key];
   return `<tr><td>${key}</td><td>${action}${isOverridden ? " <span class='overridden'>(overridden)</span>" : ""}</td></tr>`;
 }).join("");
