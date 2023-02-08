@@ -27,25 +27,21 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 
   <!-- CodeMirror CDN: https://cdnjs.com/libraries/codemirror -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css"></link>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/matchesonscrollbar.min.css" integrity="sha512-h4gYceFQpTbeHoczmjo5uOd3MIEXhf1k7LTrsPLIDrOUGu0fiT0SXB6JfoR2iAg8ml7c0cN8Eq4pvD56LLaZGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/dialog/dialog.min.css" integrity="sha512-Vogm+Cii1SXP5oxWQyPdkA91rHB776209ZVvX4C/i4ypcfBlWVRXZGodoTDAyyZvO36JlTqDqkMhVKAYc7CMjQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/material-darker.min.css" integrity="sha512-2OhXH4Il3n2tHKwLLSDPhrkgnLBC+6lHGGQzSFi3chgVB6DJ/v6+nbx+XYO9CugQyHVF/8D/0k3Hx1eaUK2K9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.css" integrity="sha512-OmcLQEy8iGiD7PSm85s06dnR7G7C9C0VqahIPAj/KHk5RpOCmnC6R2ob1oK4/uwYhWa9BF1GC6tzxsC8TIx7Jg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/codemirror.min.css"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/matchesonscrollbar.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/dialog/dialog.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/theme/material-darker.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/hint/show-hint.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css"/>
 
   <body>
+
   <div class="top-bar">
     <button class="button-84" id="save" title="Save to .html file">💾 Save to File</button>
     <button class="button-84" id="run" title="Ctrl-S, Ctrl-Enter, or Ctrl-'">🏃‍♂️ Run</button>
-    <span class="button-84">
-      <label>
-        <input id="horiz" type="checkbox"/> Horizontal
-      </label>
-    </span>
+    <button class="button-84 text-nowrap" id="layoutBtn" title="Change layout"></button>
     <a href="#" id="keyShortcuts" title="Show Keyshortcuts">⌨️</a>
     <a href="https://github.com/lewdev/extext" title="Source Code" target="_blank">👨‍💻</a>
-    
   </div>
 
   <div class="col col-l">
@@ -58,46 +54,47 @@
 
   <div id="key-shortcuts" class="modal-window">
     <div>
+      <div style="text-align:center"><a href="https://github.com/lewdev/extext" title="Source Code" target="_blank">👨‍💻 View Source Code</a></div>
       <div class="modal-content"></div>
       <a href="#" title="Close" class="modal-close">&times;</a>
     </div>
   </div>
 
   <!-- See https://cdnjs.com/libraries/codemirror -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/javascript/javascript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/xml/xml.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/css/css.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/mode/htmlmixed/htmlmixed.min.js"></script>
 
   <!-- Press Ctrl-F, Ctr-Shift-R to search, search & replace, etc. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/search.min.js" integrity="sha512-jbqegru8OL6hPtAAWTI/+r30j95Qdyx9AESgBC1dB6Ldjqzc292pDWFdLPVWHpgyYM5V//zdNjP8PjdVlRPmXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/search.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Toggle Comments -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/comment/comment.min.js" integrity="sha512-U0udq4Tvwzb+OiL6f7aak/n07mlIutTl+pEPtKoK0oOTF4Q9SkLOQYvKpIaCIM8CKTufd7szgeN9VDcgXDVvWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/comment/comment.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Enables dialog for search -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/dialog/dialog.min.js" integrity="sha512-we+ZB6C1/Gi+WtMSWNefd59oPqrfzsm8StIbEtIwaSP1CfPdV/ScqEknSw3nQS4tocb9885wdu/TgPfCDePx7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/dialog/dialog.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Press Alt+G to jump to line -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/jump-to-line.min.js" integrity="sha512-82DIItx2hxdDqa893OQJ86MzyRj2Zrf8SvXPu/XlHSV6WhFMLx5ZeRFmnrHQPi1zVRXlqrlpliidEXFTj+Zuag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/jump-to-line.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- highlights highlighted matching text  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/scroll/annotatescrollbar.min.js" integrity="sha512-SPKYZCZyjHhQngKdsnTUX0Cb3+gx53U0nVUs/VAV7zYrLdDBmqRi3EF8gevJS6ft1OstIt8BZFEY4TTuVBKbhQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/matchesonscrollbar.min.js" integrity="sha512-kEHEtLUzUaWJKLXqV4F8ejXnNFrOSy42xHJM66LSXgsz3fk2jcOS6C5muJApLN1qKcFLviMnSxod2nQGhcqS3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/searchcursor.min.js" integrity="sha512-nICucPRt5hIHxMWob9BGrtclKdO9j4lzz3aY/lRNJzUoxT+QODCEYxiB5sywrKdAMYXjshdM9UpRCwlHKDb9Yw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/match-highlighter.min.js" integrity="sha512-BupHqidnLxBFdUXSh5tC4RPFclky7flT/Vz+d7SBlThqcpRpT9pbw1/OzbXhDYrWGbnpqk3SMW5v9bDCAeyTYw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/scroll/annotatescrollbar.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/matchesonscrollbar.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/searchcursor.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/search/match-highlighter.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- highlights the matching brackets like {}[]""'' -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js" integrity="sha512-03Ei8A+mDhwF6O/CmXM47U4A9L7TobAxMbPV2Wn5cEbY76lngHQRyvvmnqhJ8IthfoxrRqmtoBxQCxOC7AOeKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/edit/matchbrackets.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- auto closes brackets like {}[]""'' -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js" integrity="sha512-cCnOU69ESswPmMV3f9TR7WgctoJZliqGbJ8WeLn0VlUrngSsmtVopRf6OG/epbURGfNmY4RY6RzZ/mWkPQ/onw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/edit/closebrackets.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Sublime Commands -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/keymap/sublime.min.js" integrity="sha512-CB1k89Ilzxp1upm9MpHjWR0Ec2wg/OzDfWC/pmjJkDnxmXMl4AhgZ4bYPdkWjlL6NoLfoZppxHf55hunUgg8wQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/keymap/sublime.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Use JavaScript declared in code to give hints -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js" integrity="sha512-kCn9g92k3GM90eTPGMNwvpCAtLmvyqbpvrdnhm0NMt6UEHYs+DjRO4me8VcwInLWQ9azmamS1U1lbQV627/TBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/javascript-hint.min.js" integrity="sha512-HB0sEfERI4Pe2z7rbx7JVGS0SEEGbnAbV+9X0bs3Hs9R/nCYartwJQg16bK1P0jPsMzbiXjT+kYNHYLCsHQ8HA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/hint/show-hint.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.11/addon/hint/javascript-hint.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="./script.js"></script>
 

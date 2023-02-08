@@ -1,30 +1,35 @@
 const USER_CONFIG_REF = "extext-config";
 
+const LAYOUTS = "Vertical, Horiz, Screen, Editor".split(", ");
+const [Vertical, Horiz, Screen, Editor] = LAYOUTS;
+const LAYOUT_EMOJIS = ["↕️", "↔️", "💻", "🧑‍💻"];
+
 let userConfig = {
   useHorizLayout: false,
+  layout: Vertical,
   content: "",
 };
 
 onload = () => {
   let storedConfig = localStorage.getItem(USER_CONFIG_REF);
   if (storedConfig) userConfig = JSON.parse(storedConfig);
-  const { content, useHorizLayout } = userConfig;
+  const { content, layout } = userConfig;
 
   // set the last run content
   editor.setValue(content);
 
-  if (useHorizLayout) {
-    document.body.className = 'horiz';
-    horiz.checked = true;
-  }
+  document.body.className = layout || Vertical;
 
   //if user is already seeing the hash in the URL, it will render the shortcuts
   if (location.href.includes("#key-shortcuts")) renderKeyShortcuts();
+
+  renderLayoutBtn(LAYOUTS.findIndex(a => a === (layout || Vertical)));
 };
 
 // my commands
 const runCode = () => {
-  const content = editor.getValue()
+  const content = editor.getValue();
+  editor.setValue(content.replace(/\t/g, "  "));//force tab to spaces
 
   //save content before running
   userConfig.content = content;
@@ -85,10 +90,14 @@ const saveToFile = () => {
   a.click(); // Start downloading
 };
 
-const toggleHorizLayout = e => {
-  const { checked } = e.target;
-  userConfig.useHorizLayout = checked;
-  document.body.className = checked ? 'horiz' : '';
+const renderLayoutBtn = index => layoutBtn.innerHTML = `${LAYOUT_EMOJIS[index]} ${capCamel(LAYOUTS[index])}`;
+
+const toggleLayout = () => {
+  const { layout } = userConfig;
+  const index = (LAYOUTS.findIndex(a => a === layout) + 1) % LAYOUTS.length;
+  userConfig.layout = LAYOUTS[index];
+  document.body.className = userConfig.layout;
+  renderLayoutBtn(index);
 };
 
 const editor = CodeMirror.fromTextArea(c, {
@@ -137,7 +146,7 @@ const editor = CodeMirror.fromTextArea(c, {
 // top bar buttons
 run.onclick = () => runCode();
 save.onclick = () => saveToFile();
-horiz.onclick = toggleHorizLayout;
+layoutBtn.onclick = toggleLayout;
 
 // util methods
 const pad = n => n > 9 ? n : "0" + n;
@@ -146,7 +155,7 @@ const getTimestamp = () => {
   const format = "FullYear Month Date - Hours Minutes Seconds".split(" ");
   const date = new Date();
   //getMonth() needs to add 1 since January = 0, enabled '-' dash too
-  return format.map(a => a === '-' ? a : pad(
+  return format.map(a => !date["get" + a] ? a : pad(
     date["get" + a]() + (a === "Month" ? 1 : 0)
   )).join("");
 };
